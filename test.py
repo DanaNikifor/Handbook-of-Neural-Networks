@@ -10,7 +10,7 @@ def create_main_buttons():
     keyboard.add(InlineKeyboardButton(text="О проекте", callback_data="about_project"))
 
     try:
-        with open('C://Users//danilka//Desktop///test1//main.txt', 'r', encoding='utf-8') as file:
+        with open('C://Users//danilka//Desktop//da//test1//main.txt', 'r', encoding='utf-8') as file:
             for line in file:
                 button = InlineKeyboardButton(text=line.strip(), callback_data=f"main_{line.strip()}")
                 keyboard.add(button)
@@ -57,7 +57,7 @@ def callback_handler(call):
 
     elif call.data.startswith("instructions_"):
         selected_item = call.data.split("_")[1]
-        file_path = f'C://Users//danilka//Desktop///test1//{selected_item}//instructions.txt'
+        file_path = f'C://Users//danilka//Desktop//da//test1//{selected_item}//instructions.txt'
         keyboard = InlineKeyboardMarkup()
         try:
             with open(file_path, 'r', encoding='utf-8') as file:
@@ -70,7 +70,7 @@ def callback_handler(call):
 
     elif call.data.startswith("models_"):
         selected_item = call.data.split("_")[1]
-        file_path = f'C://Users//danilka//Desktop///test1//{selected_item}/models.txt'
+        file_path = f'C://Users//danilka//Desktop//da//test1//{selected_item}/models.txt'
         keyboard = InlineKeyboardMarkup()
         try:
             with open(file_path, 'r', encoding='utf-8') as file:
