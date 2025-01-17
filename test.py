@@ -1,5 +1,6 @@
 import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
+import time
 
 API_TOKEN = '6775824407:AAHM4ozsE-NXhFZZ5zf-w0GvBBqv1yl4zq4'
 bot = telebot.TeleBot(API_TOKEN)
@@ -95,4 +96,9 @@ def callback_handler(call):
 
 # Запускаем бота
 if __name__ == "__main__":
-    bot.polling(none_stop=True)
+    while True:
+        try:
+            bot.polling(none_stop=True)
+        except Exception as e:
+            print(f'Ошибка: {e}')
+            time.sleep(1)  # Пауза перед повторной попыткой
