@@ -3,6 +3,7 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 API_TOKEN = '6775824407:AAHM4ozsE-NXhFZZ5zf-w0GvBBqv1yl4zq4'
 bot = telebot.TeleBot(API_TOKEN)
+main_path = 'C://Users//danilka//Desktop//da//test1'
 
 # Функция для создания основного уровня кнопок
 def create_main_buttons():
@@ -10,7 +11,7 @@ def create_main_buttons():
     keyboard.add(InlineKeyboardButton(text="О проекте", callback_data="about_project"))
 
     try:
-        with open('C://Users//danilka//Desktop//da//test1//main.txt', 'r', encoding='utf-8') as file:
+        with open(f'{main_path}//main.txt', 'r', encoding='utf-8') as file:
             for line in file:
                 button = InlineKeyboardButton(text=line.strip(), callback_data=f"main_{line.strip()}")
                 keyboard.add(button)
@@ -57,7 +58,7 @@ def callback_handler(call):
 
     elif call.data.startswith("instructions_"):
         selected_item = call.data.split("_")[1]
-        file_path = f'C://Users//danilka//Desktop//da//test1//{selected_item}//instructions.txt'
+        file_path = f'{main_path}//{selected_item}//instructions.txt'
         keyboard = InlineKeyboardMarkup()
         try:
             with open(file_path, 'r', encoding='utf-8') as file:
@@ -70,7 +71,7 @@ def callback_handler(call):
 
     elif call.data.startswith("models_"):
         selected_item = call.data.split("_")[1]
-        file_path = f'C://Users//danilka//Desktop//da//test1//{selected_item}/models.txt'
+        file_path = f'{main_path}//{selected_item}/models.txt'
         keyboard = InlineKeyboardMarkup()
         try:
             with open(file_path, 'r', encoding='utf-8') as file:

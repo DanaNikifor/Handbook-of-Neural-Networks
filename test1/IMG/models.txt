@@ -1,1 +1,2 @@
 SD-1.5
+Flux-1.0-dev-mini
