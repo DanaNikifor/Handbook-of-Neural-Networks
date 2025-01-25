@@ -1,2 +1,0 @@
-Phi3.5-mini
-Llama3.1

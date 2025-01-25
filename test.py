@@ -59,7 +59,7 @@ def callback_handler(call):
 
     elif call.data.startswith("instructions_"):
         selected_item = call.data.split("_")[1]
-        file_path = f'{main_path}//{selected_item}//instructions.txt'
+        file_path = f'{main_path}//{selected_item}/instructions.txt'
         keyboard = InlineKeyboardMarkup()
         try:
             with open(file_path, 'r', encoding='utf-8') as file:
@@ -85,12 +85,12 @@ def callback_handler(call):
 
     elif call.data.startswith("instruction_"):
         instruction = call.data.split("_")[1]
-        вывод = open(f'{main_path}//{instruction}.txt', 'r', encoding='utf-8').read()
+        вывод = open(f'{main_path}/{selected_item}/{instruction}.txt', 'r', encoding='utf-8').read()
         bot.send_message(call.message.chat.id, вывод)
 
     elif call.data.startswith("model_"):
         model = call.data.split("_")[1]
-        вывод = open(f'{main_path}//{model}.txt', 'r', encoding='utf-8').read()
+        вывод = open(f'{main_path}/{selected_item}/{model}.txt', 'r', encoding='utf-8').read()
         bot.send_message(call.message.chat.id, вывод)
 
     elif call.data == "go_back_to_main":
