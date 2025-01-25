@@ -1,10 +1,10 @@
 import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 import time
+from Token import API_TOKEN
 
-API_TOKEN = '6775824407:AAHM4ozsE-NXhFZZ5zf-w0GvBBqv1yl4zq4'
 bot = telebot.TeleBot(API_TOKEN)
-main_path = 'C://Users//danilka//Desktop//da//test1'
+main_path = './test1'
 
 # Функция для создания основного уровня кнопок
 def create_main_buttons():
@@ -85,11 +85,13 @@ def callback_handler(call):
 
     elif call.data.startswith("instruction_"):
         instruction = call.data.split("_")[1]
-        bot.send_message(call.message.chat.id, instruction)
+        вывод = open(f'{main_path}//{instruction}.txt', 'r', encoding='utf-8').read()
+        bot.send_message(call.message.chat.id, вывод)
 
     elif call.data.startswith("model_"):
         model = call.data.split("_")[1]
-        bot.send_message(call.message.chat.id, model)
+        вывод = open(f'{main_path}//{model}.txt', 'r', encoding='utf-8').read()
+        bot.send_message(call.message.chat.id, вывод)
 
     elif call.data == "go_back_to_main":
         bot.send_message(call.message.chat.id, "Выберите опцию:", reply_markup=create_main_buttons())
