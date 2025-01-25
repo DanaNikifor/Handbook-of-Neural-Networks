@@ -59,38 +59,40 @@ def callback_handler(call):
 
     elif call.data.startswith("instructions_"):
         selected_item = call.data.split("_")[1]
-        file_path = f'{main_path}//{selected_item}/instructions.txt'
+        file_path = f'{main_path}/{selected_item}/instructions.txt'
         keyboard = InlineKeyboardMarkup()
         try:
             with open(file_path, 'r', encoding='utf-8') as file:
                 instructions = file.read().splitlines()
                 for instruction in instructions:
-                    keyboard.add(InlineKeyboardButton(text=instruction, callback_data=f"instruction_{instruction}"))
+                    keyboard.add(InlineKeyboardButton(text=instruction, callback_data=f"instruction_{instruction}_{selected_item}"))
             bot.send_message(call.message.chat.id, f"Инструкции для {selected_item}:", reply_markup=keyboard)
         except FileNotFoundError:
             bot.send_message(call.message.chat.id, f"Файл {file_path} не найден!")
 
     elif call.data.startswith("models_"):
         selected_item = call.data.split("_")[1]
-        file_path = f'{main_path}//{selected_item}/models.txt'
+        file_path = f'{main_path}/{selected_item}/models.txt'
         keyboard = InlineKeyboardMarkup()
         try:
             with open(file_path, 'r', encoding='utf-8') as file:
                 models = file.read().splitlines()
                 for model in models:
-                    keyboard.add(InlineKeyboardButton(text=model, callback_data=f"model_{model}"))
+                    keyboard.add(InlineKeyboardButton(text=model, callback_data=f"model_{model}_{selected_item}"))
             bot.send_message(call.message.chat.id, f"Модели для {selected_item}:", reply_markup=keyboard)
         except FileNotFoundError:
             bot.send_message(call.message.chat.id, f"Файл {file_path} не найден!")
 
     elif call.data.startswith("instruction_"):
         instruction = call.data.split("_")[1]
-        вывод = open(f'{main_path}//{selected_item}//{instruction}.txt', 'r', encoding='utf-8').read()
+        selected_item = call.data.split("_")[2]
+        вывод = open(f'{main_path}/{selected_item}/{instruction}.txt', 'r', encoding='utf-8').read()
         bot.send_message(call.message.chat.id, вывод)
 
     elif call.data.startswith("model_"):
         model = call.data.split("_")[1]
-        вывод = open(f'{main_path}//{selected_item}//{model}.txt', 'r', encoding='utf-8').read()
+        selected_item = call.data.split("_")[2]
+        вывод = open(f'{main_path}/{selected_item}/{model}.txt', 'r', encoding='utf-8').read()
         bot.send_message(call.message.chat.id, вывод)
 
     elif call.data == "go_back_to_main":
